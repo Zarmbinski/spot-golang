@@ -1,0 +1,23 @@
+version: "3.5"
+services:
+  api:
+    container_name: spot-api
+    build: .
+    ports:
+      - "8080:8080"
+    networks:
+      - spot
+  ui:
+    container_name: spot-ui
+    build:
+      context: ./spot-ui
+      dockerfile: Dockerfile
+    ports:
+      - "8888:80"
+    networks:
+      - spot
+    depends_on:
+      - api
+networks:
+  spot:
+    name: spot_net
